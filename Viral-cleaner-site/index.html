@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Viral Cleaner</title>
+
+  <!-- Google Font (nice + clean) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --blue:#1e3a5f;   /* dark blue header */
+      --card:#2b2f36;   /* dark grey cards */
+      --text:#e8eef6;   /* soft light text */
+      --white:#ffffff;
+      --accent:#3f79ff; /* subtle accent for buttons/hover */
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background: var(--white);
+      color:#222;
+      display:flex;
+      flex-direction:column;
+    }
+
+    /* Header */
+    header{
+      background:var(--blue);
+      color:var(--white);
+      padding:36px 16px 28px;
+      text-align:center;
+      box-shadow:0 2px 10px rgba(0,0,0,.15);
+    }
+    header h1{
+      margin:0 0 8px;
+      font-size:clamp(24px,3.2vw,36px);
+      letter-spacing:.3px;
+    }
+    header p{
+      margin:0;
+      opacity:.9;
+      font-size:clamp(12px,1.8vw,14px);
+    }
+
+    /* Page container */
+    .wrap{
+      width:min(980px,92%);
+      margin:28px auto 56px;
+      display:grid;
+      gap:18px;
+    }
+
+    /* “Bar” cards */
+    .bar{
+      background:var(--card);
+      color:var(--text);
+      border-radius:14px;
+      padding:22px clamp(16px,3vw,28px);
+      box-shadow:0 10px 28px rgba(0,0,0,.18);
+    }
+    .bar h2{
+      margin:0 0 8px;
+      font-size:18px;
+      color:#fff;
+      letter-spacing:.2px;
+    }
+    .bar p{margin:8px 0 0; line-height:1.6}
+
+    /* Centered action area */
+    .plan{
+      text-align:center;
+    }
+    .plan h3{
+      margin:0 0 8px;
+      font-size:18px;
+      color:#fff;
+      font-weight:600;
+    }
+    .plan ul{
+      list-style:none;
+      padding:0;
+      margin:8px 0 18px;
+      color:var(--text);
+    }
+    .plan li{
+      margin:6px 0;
+    }
+
+    /* Buttons */
+    .actions{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .btn{
+      appearance:none;
+      border:0;
+      background:#0f59ff;
+      color:#fff;
+      padding:12px 18px;
+      border-radius:10px;
+      font-weight:600;
+      cursor:pointer;
+      transition:transform .06s ease, box-shadow .18s ease, background .18s ease;
+      box-shadow:0 6px 14px rgba(15,89,255,.25);
+      text-decoration:none;
+      display:inline-block;
+    }
+    .btn:hover{ background:var(--accent); transform:translateY(-1px); }
+    .btn.secondary{
+      background:#525861;
+      box-shadow:0 6px 14px rgba(0,0,0,.25);
+    }
+    .btn.secondary:hover{ background:#626974; }
+
+    /* Bottom note + contact */
+    .note{
+      text-align:center;
+      font-size:14px;
+    }
+    .note a{ color:#bcd3ff; text-decoration:none; }
+    .note a:hover{ text-decoration:underline; }
+
+    footer{
+      text-align:center;
+      color:#667;
+      font-size:13px;
+      margin:18px 0 32px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR (your new wording) -->
+  <header>
+    <h1>Welcome to Viral Cleaner / Enhanced Performance</h1>
+    <p></p>
+  </header>
+
+  <main class="wrap">
+
+    <!-- SECOND BAR (Description – your exact wording) -->
+    <section class="bar">
+      <h2>Description</h2>
+      <p>
+        “This tool allows viruses to be removed from your phone, laptop, and MacBook,
+        boosting performance and delivering faster and smoother services.”
+      </p>
+    </section>
+
+    <!-- THIRD BAR (keep your current wording) -->
+    <section class="bar plan">
+      <h3>Upgrade to Premium for only $5/month:</h3>
+      <ul>
+        <li>✔️ Monthly virus removal (cleaning)</li>
+        <li>✔️ Ongoing performance upgrade</li>
+      </ul>
+    <div class="actions">
+  <button id="btn-free" class="btn">Try 1 time Free Cleaning</button>
+  <button id="btn-upgrade" class="btn secondary">Upgrade to Premium</button>
+</div>
+
+
+  
+
+
+
+
+
+      
+    
+  
+
+    <!-- FOURTH BAR (payment note) -->
+    <section class="bar note">
+      <p>Add your credit or debit card after your free trial.</p>
+    </section>
+
+  </main>
+
+  <!-- Contact line you asked for -->
+   <!-- Premium button -->
+<a
+  id="btn-upgrade"
+  class="btn btn-primary"
+  href="https://buy.stripe.com/test_7sY28qdpo6SGg267Rz5wI02"
+  target="_blank"
+  rel="noopener"
+  style="display:block;text-align:center;margin:16px auto;width:fit-content;"
+>
+  Upgrade to Premium ($5/month)
+</a>
+
+  <footer>
+    For any questions or concerns, contact us via email:
+    <a href="mailto:ViralCleaner@gmail.com">viralcleaner@gmail.com</a>
+    <button id="btn-free" class="button">Try 1-time Free Cleaning</button>
+<button id="btn-upgrade" class="button" type="button">Upgrade to Premium</button>
+  <footer>
+<script>
+  const freeBtn = document.getElementById('btn-free');
+  const upgBtn  = document.getElementById('btn-upgrade');
+
+  freeBtn.addEventListener('click', () => {
+    alert('Running quick scan... ✅ No threats found!');
+  });
+
+  upgBtn.addEventListener('click', () => {
+    window.open('https://buy.stripe.com/test_7sY28qdpo6SGg267Rz5wI02',
+ '_blank', 'noopener');
+  });
+</script>
+</body>
+</html>
+
+  
+
+
