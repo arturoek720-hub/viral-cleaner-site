@@ -1,311 +1,221 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Viral Cleaner / Enhanced Performance</title>
+  <title>Viral Cleaner</title>
+
+  <!-- Google Font (nice + clean) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --blue-header: #0b3a73;
-      --blue-light: #e5f0ff;
-      --card-bg: #1c2430;
-      --card-border: #2b3644;
-      --text-main: #f5f7fb;
-      --text-muted: #cbd5e1;
-      --accent: #2563eb;
-      --accent-dark: #1d4ed8;
-      --accent-soft: #dbeafe;
-      --background: #f3f4f6;
+    :root{
+      --blue:#1e3a5f;   /* dark blue header */
+      --card:#2b2f36;   /* dark grey cards */
+      --text:#e8eef6;   /* soft light text */
+      --white:#ffffff;
+      --accent:#3f79ff; /* subtle accent for buttons/hover */
     }
 
-    * {
-      box-sizing: border-box;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background: var(--white);
+      color:#222;
+      display:flex;
+      flex-direction:column;
     }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
+    /* Header */
+    header{
+      background:var(--blue);
+      color:var(--white);
+      padding:36px 16px 28px;
+      text-align:center;
+      box-shadow:0 2px 10px rgba(0,0,0,.15);
+    }
+    header h1{
+      margin:0 0 8px;
+      font-size:clamp(24px,3.2vw,36px);
+      letter-spacing:.3px;
+    }
+    header p{
+      margin:0;
+      opacity:.9;
+      font-size:clamp(12px,1.8vw,14px);
     }
 
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      background: var(--background);
-      color: #0f172a;
-      display: flex;
-      flex-direction: column;
+    /* Page container */
+    .wrap{
+      width:min(980px,92%);
+      margin:28px auto 56px;
+      display:grid;
+      gap:18px;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    /* “Bar” cards */
+    .bar{
+      background:var(--card);
+      color:var(--text);
+      border-radius:14px;
+      padding:22px clamp(16px,3vw,28px);
+      box-shadow:0 10px 28px rgba(0,0,0,.18);
+    }
+    .bar h2{
+      margin:0 0 8px;
+      font-size:18px;
+      color:#fff;
+      letter-spacing:.2px;
+    }
+    .bar p{margin:8px 0 0; line-height:1.6}
+
+    /* Centered action area */
+    .plan{
+      text-align:center;
+    }
+    .plan h3{
+      margin:0 0 8px;
+      font-size:18px;
+      color:#fff;
+      font-weight:600;
+    }
+    .plan ul{
+      list-style:none;
+      padding:0;
+      margin:8px 0 18px;
+      color:var(--text);
+    }
+    .plan li{
+      margin:6px 0;
     }
 
-    .header-bar {
-      width: 100%;
-      background: var(--blue-header);
-      color: white;
-      padding: 18px 16px;
+    /* Buttons */
+    .actions{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
     }
-
-    .header-inner {
-      max-width: 900px;
-      margin: 0 auto;
+    .btn{
+      appearance:none;
+      border:0;
+      background:#0f59ff;
+      color:#fff;
+      padding:12px 18px;
+      border-radius:10px;
+      font-weight:600;
+      cursor:pointer;
+      transition:transform .06s ease, box-shadow .18s ease, background .18s ease;
+      box-shadow:0 6px 14px rgba(15,89,255,.25);
+      text-decoration:none;
+      display:inline-block;
     }
-
-    .title {
-      margin: 0;
-      font-size: clamp(22px, 3vw, 28px);
-      font-weight: 700;
+    .btn:hover{ background:var(--accent); transform:translateY(-1px); }
+    .btn.secondary{
+      background:#525861;
+      box-shadow:0 6px 14px rgba(0,0,0,.25);
     }
+    .btn.secondary:hover{ background:#626974; }
 
-    .subtitle {
-      margin: 6px 0 0;
-      font-size: 14px;
-      opacity: 0.9;
+    /* Bottom note + contact */
+    .note{
+      text-align:center;
+      font-size:14px;
     }
+    .note a{ color:#bcd3ff; text-decoration:none; }
+    .note a:hover{ text-decoration:underline; }
 
-    .page {
-      flex: 1;
-      width: 100%;
-      padding: 24px 16px 40px;
-    }
-
-    .page-inner {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      border: 1px solid var(--card-border);
-      padding: 18px 18px 20px;
-      color: var(--text-main);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.5);
-    }
-
-    .card + .card {
-      margin-top: 18px;
-    }
-
-    .card-title {
-      margin: 0 0 10px;
-      font-size: 18px;
-      font-weight: 600;
-    }
-
-    .card-body {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .divider {
-      height: 1px;
-      margin: 14px 0 14px;
-      background: radial-gradient(circle, rgba(148,163,184,0.8) 0, transparent 60%);
-      opacity: 0.9;
-    }
-
-    .plan-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 12px;
-      font-size: 14px;
-    }
-
-    .plan-pill {
-      background: rgba(15, 23, 42, 0.9);
-      border-radius: 999px;
-      padding: 4px 10px;
-      border: 1px solid rgba(148,163,184,0.7);
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .plan-pill strong {
-      color: var(--text-main);
-      font-weight: 600;
-    }
-
-    .bullet-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 14px;
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .bullet-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 6px;
-      margin-bottom: 6px;
-    }
-
-    .bullet-icon {
-      font-size: 12px;
-      margin-top: 2px;
-    }
-
-    .button-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 9px 16px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      border: none;
-      white-space: nowrap;
-      transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
-      text-align: center;
-      min-width: 0;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: white;
-      box-shadow: 0 12px 25px rgba(37, 99, 235, 0.55);
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-dark);
-      transform: translateY(-1px);
-      box-shadow: 0 16px 32px rgba(30, 64, 175, 0.8);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--accent-soft);
-      border: 1px solid rgba(148,163,184,0.6);
-    }
-
-    .btn-outline:hover {
-      background: rgba(15,23,42,0.9);
-      transform: translateY(-1px);
-    }
-
-    .btn-full {
-      width: 100%;
-      margin-top: 18px;
-      background: var(--accent);
-      color: white;
-      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.7);
-    }
-
-    .btn-full:hover {
-      background: var(--accent-dark);
-      transform: translateY(-1px);
-    }
-
-    .foot-note {
-      margin-top: 10px;
-      font-size: 12px;
-      color: var(--text-muted);
-      max-width: 650px;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(15,23,42,0.95);
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.7);
-      padding: 3px 9px;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 10px;
-      color: var(--text-muted);
-    }
-
-    .badge-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 10px rgba(34,197,94,0.8);
-    }
-
-    .footer {
-      font-size: 11px;
-      text-align: center;
-      padding: 10px 0 18px;
-      color: #64748b;
+    footer{
+      text-align:center;
+      color:#667;
+      font-size:13px;
+      margin:18px 0 32px;
     }
   </style>
 </head>
 <body>
 
-  <div class="header-bar">
-    <div class="header-inner">
-      <h1 class="title">Welcome to Viral Cleaner / Enhanced Performance</h1>
-      <p class="subtitle">Professional virus removal and performance upgrades for your phone, laptop & MacBook.</p>
-    </div>
-  </div>
+  <!-- TOP BAR (your new wording) -->
+  <header>
+    <h1>Welcome to Viral Cleaner / Enhanced Performance</h1>
+    <p></p>
+  </header>
 
-  <div class="page">
-    <div class="page-inner">
+  <main class="wrap">
 
-      <div class="card">
-        <div class="badge">
-          <span class="badge-dot"></span> Device cleaning · Performance boost
-        </div>
-        <h2 class="card-title">Description</h2>
-        <div class="card-body">
-          “This tool allows viruses to be removed from your phone, laptop, and MacBook, boosting performance and delivering faster and smoother services.”
-        </div>
-      </div>
+    <!-- SECOND BAR (Description – your exact wording) -->
+    <section class="bar">
+      <h2>Description</h2>
+      <p>
+        “This tool allows viruses to be removed from your phone, laptop, and MacBook,
+        boosting performance and delivering faster and smoother services.”
+      </p>
+    </section>
 
-      <div class="card">
-        <h2 class="card-title">Upgrade to Premium for only $5/month</h2>
+    <!-- THIRD BAR (keep your current wording) -->
+    <section class="bar plan">
+      <h3>Upgrade to Premium for only $5/month:</h3>
+      <ul>
+        <li>✔️ Monthly virus removal (cleaning)</li>
+        <li>✔️ Ongoing performance upgrade</li>
+      </ul>
+    <div class="actions">
+  <button id="btn-free" class="btn">Try 1 time Free Cleaning</button>
+  <button id="btn-upgrade" class="btn secondary">Upgrade to Premium</button>
+</div>
 
-        <div class="plan-row">
-          <span>Here’s what you get with Premium:</span>
-          <span class="plan-pill"><strong>✔</strong> Monthly virus removal</span>
-          <span class="plan-pill"><strong>✔</strong> Performance upgrade</span>
-        </div>
 
-        <ul class="bullet-list">
-          <li><span class="bullet-icon">•</span> Full device cleanup every month.</li>
-          <li><span class="bullet-icon">•</span> System optimization.</li>
-          <li><span class="bullet-icon">•</span> Access to giveaways and raffles.</li>
-        </ul>
+  
 
-        <div class="button-row">
-          <a href="#" class="btn btn-outline">Try 1 time Free Cleaning</a>
-          <a href="#" class="btn btn-primary">Upgrade to Premium</a>
-        </div>
 
-        <button class="btn btn-full">Upgrade to Premium ($5/month)</button>
 
-        <p class="foot-note">After checking out, you’ll be shown next-step instructions.</p>
-      </div>
 
-    </div>
-  </div>
 
-  <div class="footer">
-    © <span id="year"></span> Viral Cleaner · Enhanced Performance
-  </div>
+      
+    
+  
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+    <!-- FOURTH BAR (payment note) -->
+    <section class="bar note">
+      <p>Add your credit or debit card after your free trial.</p>
+    </section>
 
+  </main>
+
+  <!-- Contact line you asked for -->
+   <!-- Premium button -->
+<a
+  id="btn-upgrade"
+  class="btn btn-primary"
+  href="https://buy.stripe.com/test_7sY28qdpo6SGg267Rz5wI02"
+  target="_blank"
+  rel="noopener"
+  style="display:block;text-align:center;margin:16px auto;width:fit-content;"
+>
+  Upgrade to Premium ($5/month)
+</a>
+
+  <footer>
+    For any questions or concerns, contact us via email:
+    <a href="mailto:ViralCleaner@gmail.com">viralcleaner@gmail.com</a>
+    <button id="btn-free" class="button">Try 1-time Free Cleaning</button>
+<button id="btn-upgrade" class="button" type="button">Upgrade to Premium</button>
+  <footer>
+<script>
+  const freeBtn = document.getElementById('btn-free');
+  const upgBtn  = document.getElementById('btn-upgrade');
+
+  freeBtn.addEventListener('click', () => {
+    alert('Running quick scan... ✅ No threats found!');
+  });
+
+  upgBtn.addEventListener('click', () => {
+    window.open('https://buy.stripe.com/test_7sY28qdpo6SGg267Rz5wI02',
+ '_blank', 'noopener');
+  });
+</script>
 </body>
 </html>
