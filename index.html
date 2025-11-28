@@ -1,466 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Viral Cleaner</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Viral Cleaner</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+body {
+  background-color: #0b132b;
+  color: #ffffff;
+  padding: 40px 20px;
+}
 
-  <style>
-    :root {
-      --blue:#1a3a5f;
-      --card:#202a36;
-      --text:#e4edf5;
-      --white:#ffffff;
-      --accent:#f97316;
-    }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-    * {
-      box-sizing: border-box;
-    }
+.header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
 
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
 
-    body {
-      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      background: radial-gradient(circle at top, #1b2940 0, #050710 50%, #020307 100%);
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-    }
+.card {
+  background-color: #1c2541;
+  border: 1px solid #3a506b;
+  border-radius: 12px;
+  padding: 20px;
+  flex: 1;
+  min-width: 300px;
+  box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.35);
+}
 
-    a { color: inherit; text-decoration: none; }
+.badge {
+  display: inline-block;
+  padding: 6px 14px;
+  background-color: #3a506b;
+  border-radius: 999px;
+  font-size: 12px;
+  margin-bottom: 15px;
+}
 
-    .page {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 16px 16px 40px;
-    }
+h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
 
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-    }
+p, li {
+  color: #d9e6f2;
+  line-height: 1.6;
+}
 
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+ul {
+  margin-left: 20px;
+  margin-top: 10px;
+}
 
-    .logo-circle {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #22c55e, #0ea5e9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 16px;
-      color: #020617;
-    }
+.button {
+  display: inline-block;
+  background-color: #1bb1ff;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.2s;
+}
 
-    .brand-name {
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      font-size: 14px;
-    }
+.button:hover {
+  background-color: #1098e6;
+}
 
-    .nav-right {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      font-size: 13px;
-    }
-
-    .nav-pill {
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.4);
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      opacity: 0.9;
-    }
-
-    .nav-pill span.dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #22c55e;
-    }
-
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    @media (max-width: 900px) {
-      .layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .hero-card, .side-card {
-      background: radial-gradient(circle at top left, rgba(148,163,184,0.2), transparent 50%), rgba(15,23,42,0.95);
-      border-radius: 18px;
-      border: 1px solid rgba(148,163,184,0.35);
-      padding: 18px 18px 18px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(59,130,246,0.25), transparent 55%);
-      opacity: 0.7;
-      pointer-events: none;
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.95);
-      border: 1px solid rgba(148,163,184,0.6);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 10px;
-    }
-
-    .eyebrow span.badge-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 12px rgba(34,197,94,0.8);
-    }
-
-    .hero-title {
-      font-size: clamp(26px, 4vw, 32px);
-      line-height: 1.1;
-      margin: 0 0 8px;
-    }
-
-    .hero-highlight {
-      color: #38bdf8;
-    }
-
-    .hero-subtitle {
-      font-size: 14px;
-      opacity: 0.9;
-      max-width: 460px;
-      margin-bottom: 16px;
-    }
-
-    .hero-bullets {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    @media (max-width: 640px) {
-      .hero-bullets {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .bullet {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      font-size: 12px;
-      opacity: 0.95;
-    }
-
-    .bullet-icon {
-      width: 18px;
-      height: 18px;
-      border-radius: 6px;
-      background: rgba(34,197,94,0.1);
-      border: 1px solid rgba(34,197,94,0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .btn {
-      border-radius: 999px;
-      padding: 9px 14px;
-      font-size: 13px;
-      border: none;
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      cursor: pointer;
-      font-weight: 500;
-      transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #22c55e, #0ea5e9);
-      color: #020617;
-      box-shadow: 0 10px 25px rgba(15,23,42,0.7);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 16px 35px rgba(15,23,42,0.9);
-    }
-
-    .btn-ghost {
-      background: rgba(15,23,42,0.9);
-      color: var(--text);
-      border: 1px solid rgba(148,163,184,0.5);
-    }
-
-    .btn-ghost:hover {
-      background: rgba(15,23,42,1);
-      transform: translateY(-1px);
-    }
-
-    .hero-footnote {
-      font-size: 11px;
-      opacity: 0.7;
-    }
-
-    .hero-footnote b {
-      opacity: 0.9;
-    }
-
-    .side-card-title {
-      font-size: 16px;
-      margin: 0 0 6px;
-    }
-
-    .side-card-sub {
-      font-size: 12px;
-      opacity: 0.85;
-      margin-bottom: 14px;
-    }
-
-    .side-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-
-    .side-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 12px;
-      background: rgba(15,23,42,0.9);
-      border-radius: 10px;
-      padding: 8px 10px;
-      border: 1px solid rgba(51,65,85,0.8);
-    }
-
-    .side-item-left {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .side-item-label {
-      opacity: 0.85;
-    }
-
-    .side-item-value {
-      font-weight: 600;
-    }
-
-    .side-tag {
-      font-size: 11px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(56,189,248,0.12);
-      border: 1px solid rgba(56,189,248,0.5);
-    }
-
-    .side-divider {
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(148,163,184,0.6), transparent);
-      margin: 8px 0 10px;
-    }
-
-    .side-footnote {
-      font-size: 11px;
-      opacity: 0.75;
-    }
-
-    .side-footnote b {
-      opacity: 0.95;
-    }
-
-    .footer {
-      font-size: 11px;
-      opacity: 0.7;
-      text-align: center;
-      padding-bottom: 4px;
-    }
-  </style>
+.footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 13px;
+  color: #9fb3c8;
+}
+</style>
 </head>
+
 <body>
-  <div class="page">
-    <header class="nav">
-      <div class="nav-left">
-        <div class="logo-circle">V</div>
-        <div class="brand-name">Viral Cleaner</div>
-      </div>
-      <div class="nav-right">
-        <div class="nav-pill">
-          <span class="dot"></span>
-          Live system scans · 24/7
-        </div>
-      </div>
-    </header>
+<div class="container">
 
-    <main class="layout">
-      <section class="hero-card">
-        <div class="hero-inner">
-          <div class="eyebrow">
-            <span class="badge-dot"></span>
-            Device Booster · Virus Shield
-          </div>
+  <div class="header">VIRAL CLEANER</div>
 
-          <h1 class="hero-title">
-            Clean, boost & protect your
-            <span class="hero-highlight">phone, tablet & laptop</span>.
-          </h1>
+  <div class="flex">
 
-          <p class="hero-subtitle">
-            Professional remote device cleanup. We remove junk, hidden malware, bloatware and performance bottlenecks — so your devices feel brand new again.
-          </p>
+    <!-- LEFT CARD -->
+    <div class="card">
+      <div class="badge">DEVICE BOOSTER · VIRUS SHIELD</div>
 
-          <div class="hero-bullets">
-            <div class="bullet">
-              <div class="bullet-icon">⚡</div>
-              <div>Speed optimization, cache deep-clean & startup tune for faster boot and smoother performance.</div>
-            </div>
-            <div class="bullet">
-              <div class="bullet-icon">🛡️</div>
-              <div>Malware, spyware & tracking scan — we locate and remove hidden threats and risky apps.</div>
-            </div>
-            <div class="bullet">
-              <div class="bullet-icon">📱</div>
-              <div>Works with iPhone, Android, Windows laptops, Chromebooks, tablets & more.</div>
-            </div>
-            <div class="bullet">
-              <div class="bullet-icon">🎁</div>
-              <div>Exclusive giveaways & raffles for active premium members every month.</div>
-            </div>
-          </div>
+      <h2>Clean, boost & protect your<br>phone, tablet & laptop.</h2>
 
-          <div class="hero-actions">
-            <a
-              class="btn btn-primary"
-              href="https://buy.stripe.com/test_4gw4ig7iZ27i7Li8wz"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Upgrade to Premium – $5 / month
-            </a>
+      <p>Professional remote device cleanup. We remove junk, hidden malware, bloatware and performance bottlenecks — so your devices feel brand new again.</p>
 
-            <a href="premiumdashboard.html" class="btn btn-ghost">
-              Go to Premium Dashboard
-            </a>
-          </div>
+      <ul>
+        <li>Speed optimization, cache deep-clean & startup tune-up for faster boot and smoother performance.</li>
+        <li>Works with iPhone, Android, Windows laptops, Chromebooks, tablets & more.</li>
+        <li>Monitors spyware & tracking scams — we locate and remove hidden threats and risky apps.</li>
+        <li>Exclusive giveaways & raffle for active Premium members every month.</li>
+      </ul>
 
-          <div class="hero-footnote">
-            <b>What you get:</b> deep cleanup session, performance tune-up, scam-site shield, and entry into our ongoing cash & device giveaways for members.
-          </div>
-        </div>
-      </section>
+      <a href="#" class="button">Upgrade to Premium – $5/month</a><br><br>
+      <a href="#" style="color:#1bb1ff; text-decoration:underline; font-size:14px;">Go to Premium Dashboard</a>
+    </div>
 
-      <aside class="side-card">
-        <h2 class="side-card-title">What’s included with Premium</h2>
-        <p class="side-card-sub">
-          Every month we perform pro-level optimization on your devices and give you access to members-only perks.
-        </p>
+    <!-- RIGHT CARD -->
+    <div class="card">
+      <div class="badge" style="float:right; background:#1bb1ff; color:#000;">● Live system scans · 24/7</div>
 
-        <div class="side-list">
-          <div class="side-item">
-            <div class="side-item-left">
-              <span class="side-item-label">Remote device cleanup</span>
-              <span class="side-item-value">1 full session / month</span>
-            </div>
-            <span class="side-tag">Phone · Tablet · Laptop</span>
-          </div>
+      <h2>What’s Included with Premium</h2>
 
-          <div class="side-item">
-            <div class="side-item-left">
-              <span class="side-item-label">Performance boost</span>
-              <span class="side-item-value">Up to 2× faster</span>
-            </div>
-            <span class="side-tag">Startup + storage</span>
-          </div>
+      <p>Every month we perform pro-level optimization on your devices and give you access to members-only perks.</p>
 
-          <div class="side-item">
-            <div class="side-item-left">
-              <span class="side-item-label">Giveaways & raffles</span>
-              <span class="side-item-value">Automatic entry</span>
-            </div>
-            <span class="side-tag">Members only</span>
-          </div>
-        </div>
+      <ul>
+        <li><strong>Remote device cleanup</strong> – 1 full session / month</li>
+        <li><strong>Performance boost</strong> – Up to 2× faster</li>
+        <li><strong>Giveaways & raffles</strong> – Automatic entry</li>
+        <li><strong>Premium-only perks</strong></li>
+      </ul>
 
-        <div class="side-divider"></div>
+      <a href="#" class="button" style="width:100%; text-align:center;">Upgrade to Premium – $5/month</a>
+    </div>
 
-        <p class="side-footnote">
-          <b>How it works:</b> After checkout you’ll see your thank-you page with next-step instructions.
-          You’ll be able to schedule your device cleanup and claim your raffle entries right from the
-          premium dashboard.
-        </p>
-      </aside>
-    </main>
-
-    <footer class="footer">
-      © <span id="year"></span> Viral Cleaner · Secure optimization & device protection for everyday people.
-    </footer>
   </div>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  <div class="footer">
+    © 2025 Viral Cleaner · Secure optimization & device protection for everyday people.
+  </div>
+
+</div>
 </body>
 </html>
