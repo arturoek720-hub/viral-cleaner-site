@@ -3,18 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Viral Cleaner</title>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <title>Viral Cleaner / Enhanced Performance</title>
 
   <style>
     :root {
-      --blue:#1a3a5f;
-      --card:#202a36;
-      --text:#e4edf5;
-      --white:#ffffff;
-      --accent:#f97316;
+      --blue-header: #0b3a73;
+      --blue-light: #e5f0ff;
+      --card-bg: #1c2430;
+      --card-border: #2b3644;
+      --text-main: #f5f7fb;
+      --text-muted: #cbd5e1;
+      --accent: #2563eb;
+      --accent-dark: #1d4ed8;
+      --accent-soft: #dbeafe;
+      --background: #f3f4f6;
     }
 
     * {
@@ -22,446 +24,288 @@
     }
 
     html, body {
-      height: 100%;
       margin: 0;
       padding: 0;
+      height: 100%;
     }
 
     body {
-      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      background: radial-gradient(circle at top, #1b2940 0, #050710 50%, #020307 100%);
-      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--background);
+      color: #0f172a;
       display: flex;
       flex-direction: column;
     }
 
-    a { color: inherit; text-decoration: none; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .header-bar {
+      width: 100%;
+      background: var(--blue-header);
+      color: white;
+      padding: 18px 16px;
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(22px, 3vw, 28px);
+      font-weight: 700;
+    }
+
+    .subtitle {
+      margin: 6px 0 0;
+      font-size: 14px;
+      opacity: 0.9;
+    }
 
     .page {
       flex: 1;
-      display: flex;
-      flex-direction: column;
-      max-width: 1100px;
+      width: 100%;
+      padding: 24px 16px 40px;
+    }
+
+    .page-inner {
+      max-width: 900px;
       margin: 0 auto;
-      padding: 16px 16px 40px;
     }
 
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      padding: 18px 18px 20px;
+      color: var(--text-main);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.5);
     }
 
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .card + .card {
+      margin-top: 18px;
     }
 
-    .logo-circle {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #22c55e, #0ea5e9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 16px;
-      color: #020617;
+    .card-title {
+      margin: 0 0 10px;
+      font-size: 18px;
+      font-weight: 600;
     }
 
-    .brand-name {
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+    .card-body {
       font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
     }
 
-    .nav-right {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      font-size: 13px;
-    }
-
-    .nav-pill {
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.4);
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+    .divider {
+      height: 1px;
+      margin: 14px 0 14px;
+      background: radial-gradient(circle, rgba(148,163,184,0.8) 0, transparent 60%);
       opacity: 0.9;
     }
 
-    .nav-pill span.dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #22c55e;
-    }
-
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    @media (max-width: 900px) {
-      .layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .hero-card, .side-card {
-      background: radial-gradient(circle at top left, rgba(148,163,184,0.2), transparent 50%), rgba(15,23,42,0.95);
-      border-radius: 18px;
-      border: 1px solid rgba(148,163,184,0.35);
-      padding: 18px 18px 18px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(59,130,246,0.25), transparent 55%);
-      opacity: 0.7;
-      pointer-events: none;
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.95);
-      border: 1px solid rgba(148,163,184,0.6);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 10px;
-    }
-
-    .eyebrow span.badge-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 12px rgba(34,197,94,0.8);
-    }
-
-    .hero-title {
-      font-size: clamp(26px, 4vw, 32px);
-      line-height: 1.1;
-      margin: 0 0 8px;
-    }
-
-    .hero-highlight {
-      color: #38bdf8;
-    }
-
-    .hero-subtitle {
-      font-size: 14px;
-      opacity: 0.9;
-      max-width: 460px;
-      margin-bottom: 16px;
-    }
-
-    .hero-bullets {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    @media (max-width: 640px) {
-      .hero-bullets {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .bullet {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      font-size: 12px;
-      opacity: 0.95;
-    }
-
-    .bullet-icon {
-      width: 18px;
-      height: 18px;
-      border-radius: 6px;
-      background: rgba(34,197,94,0.1);
-      border: 1px solid rgba(34,197,94,0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-    }
-
-    .hero-actions {
+    .plan-row {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       align-items: center;
       margin-bottom: 12px;
+      font-size: 14px;
     }
 
-    .btn {
+    .plan-pill {
+      background: rgba(15, 23, 42, 0.9);
       border-radius: 999px;
-      padding: 9px 14px;
-      font-size: 13px;
-      border: none;
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      cursor: pointer;
-      font-weight: 500;
-      transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #22c55e, #0ea5e9);
-      color: #020617;
-      box-shadow: 0 10px 25px rgba(15,23,42,0.7);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 16px 35px rgba(15,23,42,0.9);
-    }
-
-    .btn-ghost {
-      background: rgba(15,23,42,0.9);
-      color: var(--text);
-      border: 1px solid rgba(148,163,184,0.5);
-    }
-
-    .btn-ghost:hover {
-      background: rgba(15,23,42,1);
-      transform: translateY(-1px);
-    }
-
-    .hero-footnote {
-      font-size: 11px;
-      opacity: 0.7;
-    }
-
-    .hero-footnote b {
-      opacity: 0.9;
-    }
-
-    .side-card-title {
-      font-size: 16px;
-      margin: 0 0 6px;
-    }
-
-    .side-card-sub {
+      padding: 4px 10px;
+      border: 1px solid rgba(148,163,184,0.7);
       font-size: 12px;
-      opacity: 0.85;
-      margin-bottom: 14px;
+      color: var(--text-muted);
     }
 
-    .side-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-
-    .side-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 12px;
-      background: rgba(15,23,42,0.9);
-      border-radius: 10px;
-      padding: 8px 10px;
-      border: 1px solid rgba(51,65,85,0.8);
-    }
-
-    .side-item-left {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .side-item-label {
-      opacity: 0.85;
-    }
-
-    .side-item-value {
+    .plan-pill strong {
+      color: var(--text-main);
       font-weight: 600;
     }
 
-    .side-tag {
-      font-size: 11px;
-      padding: 4px 8px;
+    .bullet-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 14px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .bullet-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .bullet-icon {
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 16px;
       border-radius: 999px;
-      background: rgba(56,189,248,0.12);
-      border: 1px solid rgba(56,189,248,0.5);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      white-space: nowrap;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+      text-align: center;
+      min-width: 0;
     }
 
-    .side-divider {
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(148,163,184,0.6), transparent);
-      margin: 8px 0 10px;
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 12px 25px rgba(37, 99, 235, 0.55);
     }
 
-    .side-footnote {
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 16px 32px rgba(30, 64, 175, 0.8);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent-soft);
+      border: 1px solid rgba(148,163,184,0.6);
+    }
+
+    .btn-outline:hover {
+      background: rgba(15,23,42,0.9);
+      transform: translateY(-1px);
+    }
+
+    .btn-full {
+      width: 100%;
+      margin-top: 18px;
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.7);
+    }
+
+    .btn-full:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+    }
+
+    .foot-note {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+      max-width: 650px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15,23,42,0.95);
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      padding: 3px 9px;
       font-size: 11px;
-      opacity: 0.75;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+      color: var(--text-muted);
     }
 
-    .side-footnote b {
-      opacity: 0.95;
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34,197,94,0.8);
     }
 
     .footer {
       font-size: 11px;
-      opacity: 0.7;
       text-align: center;
-      padding-bottom: 4px;
+      padding: 10px 0 18px;
+      color: #64748b;
     }
   </style>
 </head>
 <body>
+
+  <div class="header-bar">
+    <div class="header-inner">
+      <h1 class="title">Welcome to Viral Cleaner / Enhanced Performance</h1>
+      <p class="subtitle">Professional virus removal and performance upgrades for your phone, laptop & MacBook.</p>
+    </div>
+  </div>
+
   <div class="page">
-    <header class="nav">
-      <div class="nav-left">
-        <div class="logo-circle">V</div>
-        <div class="brand-name">Viral Cleaner</div>
-      </div>
-      <div class="nav-right">
-        <div class="nav-pill">
-          <span class="dot"></span>
-          Live system scans · 24/7
+    <div class="page-inner">
+
+      <div class="card">
+        <div class="badge">
+          <span class="badge-dot"></span> Device cleaning · Performance boost
+        </div>
+        <h2 class="card-title">Description</h2>
+        <div class="card-body">
+          “This tool allows viruses to be removed from your phone, laptop, and MacBook, boosting performance and delivering faster and smoother services.”
         </div>
       </div>
-    </header>
 
-    <main class="layout">
-      <section class="hero-card">
-        <div class="hero-inner">
-          <div class="eyebrow">
-            <span class="badge-dot"></span>
-            Device Booster · Virus Shield
-          </div>
+      <div class="card">
+        <h2 class="card-title">Upgrade to Premium for only $5/month</h2>
 
-          <h1 class="hero-title">
-            Clean, boost & protect your
-            <span class="hero-highlight">phone, tablet & laptop</span>.
-          </h1>
-
-          <p class="hero-subtitle">
-            Professional remote device cleanup. We remove junk, hidden malware, bloatware and performance bottlenecks — so your devices feel brand new again.
-          </p>
-
-          <div class="hero-bullets">
-            <div class="bullet">
-              <div class="bullet-icon">⚡</div>
-              <div>Speed optimization, cache deep-clean & startup tune for faster boot and smoother performance.</div>
-            </div>
-            <div class="bullet">
-              <div class="bullet-icon">🛡️</div>
-              <div>Malware, spyware & tracking scan — we locate and remove hidden threats and risky apps.</div>
-            </div>
-            <div class="bullet">
-              <div class="bullet-icon">📱</div>
-              <div>Works with iPhone, Android, Windows laptops, Chromebooks, tablets & more.</div>
-            </div>
-            <div class="bullet">
-              <div class="bullet-icon">🎁</div>
-              <div>Exclusive giveaways & raffles for active premium members every month.</div>
-            </div>
-          </div>
-
-          <div class="hero-actions">
-            <!-- Stripe checkout link -->
-            <a
-              class="btn btn-primary"
-              href="https://buy.stripe.com/test_4gw4ig7iZ27i7Li8wz"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Upgrade to Premium – $5 / month
-            </a>
-
-            <a href="premiumdashboard.html" class="btn btn-ghost">
-              Go to Premium Dashboard
-            </a>
-          </div>
-
-          <div class="hero-footnote">
-            <b>What you get:</b> deep cleanup session, performance tune-up, scam-site shield, and entry into our ongoing cash & device giveaways for members.
-          </div>
-        </div>
-      </section>
-
-      <aside class="side-card">
-        <h2 class="side-card-title">What’s included with Premium</h2>
-        <p class="side-card-sub">
-          Every month we perform pro-level optimization on your devices and give you access to members-only perks.
-        </p>
-
-        <div class="side-list">
-          <div class="side-item">
-            <div class="side-item-left">
-              <span class="side-item-label">Remote device cleanup</span>
-              <span class="side-item-value">1 full session / month</span>
-            </div>
-            <span class="side-tag">Phone · Tablet · Laptop</span>
-          </div>
-
-          <div class="side-item">
-            <div class="side-item-left">
-              <span class="side-item-label">Performance boost</span>
-              <span class="side-item-value">Up to 2× faster</span>
-            </div>
-            <span class="side-tag">Startup + storage</span>
-          </div>
-
-          <div class="side-item">
-            <div class="side-item-left">
-              <span class="side-item-label">Giveaways & raffles</span>
-              <span class="side-item-value">Automatic entry</span>
-            </div>
-            <span class="side-tag">Members only</span>
-          </div>
+        <div class="plan-row">
+          <span>Here’s what you get with Premium:</span>
+          <span class="plan-pill"><strong>✔</strong> Monthly virus removal</span>
+          <span class="plan-pill"><strong>✔</strong> Performance upgrade</span>
         </div>
 
-        <div class="side-divider"></div>
+        <ul class="bullet-list">
+          <li><span class="bullet-icon">•</span> Full device cleanup every month.</li>
+          <li><span class="bullet-icon">•</span> System optimization.</li>
+          <li><span class="bullet-icon">•</span> Access to giveaways and raffles.</li>
+        </ul>
 
-        <p class="side-footnote">
-          <b>How it works:</b> After checkout you’ll see your thank-you page with next-step instructions.
-          You’ll be able to schedule your device cleanup and claim your raffle entries right from the
-          premium dashboard.
-        </p>
-      </aside>
-    </main>
+        <div class="button-row">
+          <a href="#" class="btn btn-outline">Try 1 time Free Cleaning</a>
+          <a href="#" class="btn btn-primary">Upgrade to Premium</a>
+        </div>
 
-    <footer class="footer">
-      © <span id="year"></span> Viral Cleaner · Secure optimization & device protection for everyday people.
-    </footer>
+        <button class="btn btn-full">Upgrade to Premium ($5/month)</button>
+
+        <p class="foot-note">After checking out, you’ll be shown next-step instructions.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    © <span id="year"></span> Viral Cleaner · Enhanced Performance
   </div>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
+
 </body>
 </html>
